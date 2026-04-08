@@ -1,8 +1,6 @@
-
-
-gradientstart = 1
-gradientend = 2
-size = 1000
+gradientstart = int(input('enter first color value (int):'))
+gradientend = int(input('enter second color value (int):'))
+size = int(input('enter size (layers) of gradient:'))
 
 def generatepattern(a: int, b: int, ratioa: float, length: int) -> str:
     result = []
@@ -29,4 +27,5 @@ def generategradient(a: int, b: int, size: int) -> str:
     return "".join(patterns)
     
 print(generategradient(gradientstart,gradientend,size))
-    
+
+input()
