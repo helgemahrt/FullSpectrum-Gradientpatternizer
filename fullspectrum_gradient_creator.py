@@ -4,7 +4,7 @@ size = int(input('enter size (layers) of gradient:'))
 
 def generatepattern(a: int, b: int, ratioa: float, length: int) -> str:
     result = []
-    error = 0.0
+    error = 1.0
 
     for _ in range(length):
         error += ratioa
