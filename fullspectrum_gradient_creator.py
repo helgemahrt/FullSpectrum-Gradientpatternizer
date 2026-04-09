@@ -1,15 +1,27 @@
+import json
 gradientstart = int(input('enter first color value (int): '))
 gradientend = int(input('enter second color value (int): '))
 size = int(input('enter size/layers of gradient (int): '))
 gradientoffset = int(input('enter offset in layers from the bottom (int): '))
 smallgradient = int(input('enter gadient stepsize (int): '))
+datajunkie = False
+match input('Do you want some Data for insights about the Gradient?(bool): '):
+    case "1" | "true" | "True" | "y" | "yes":
+        datajunkie=True
+        
+print('')
+def log(msg: str):
+    if datajunkie:
+        print(msg)
 
-def getratioarray(stepsize) -> list:
+def getratioarray(stepsize: int) -> list:
     array = []
     step = 1
     while step > 0:
         step -= (stepsize/100)
-        array.append(step)
+        array.append(round(step,2))
+    log("Count of ratios: "+str(len(array)))
+    log("Ratios: "+json.dumps(array))
     return array
     
 def generatepattern(a: int, b: int, ratioa: float, length: int) -> str:
@@ -31,7 +43,7 @@ def generategradient(a: int, b: int, size: int, offset: int, ratiostepsize: int)
     ratios = getratioarray(ratiostepsize)
     patterns = []
     patternsize = size // len(ratios)
-    
+    log("Amount of layers per ratio: "+str(patternsize))
     for _ in range(offset):
         patterns.append(str(a))
     
@@ -40,6 +52,9 @@ def generategradient(a: int, b: int, size: int, offset: int, ratiostepsize: int)
     
     return "".join(patterns)
     
-print(generategradient(gradientstart,gradientend,size,gradientoffset, smallgradient))
+gradient = generategradient(gradientstart,gradientend,size,gradientoffset, smallgradient)
+print('')
+print('Output:')
+print(gradient)
 
 input()
