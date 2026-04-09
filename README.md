@@ -12,3 +12,5 @@ purgetower might get sliced janky
   -> expects integer to offset gradient from buildplate (layer 1)
 - 'enter gadient stepsize (int): '                 
   -> expects integer value as stepsize. example: 5 for 5% mixing-stepsize
+- 'Do you want some Data for insights about the Gradient?(bool): '                 
+  -> expects 1^, true, True, y or yes to give user data insights
