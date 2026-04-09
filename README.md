@@ -1,5 +1,6 @@
 ## Note
 purgetower might get sliced janky
+some layers are missing in the resultpattern
 
 ## Userinputs
 - 'Do you want some Data for insights about the Gradient?(bool): '                 
