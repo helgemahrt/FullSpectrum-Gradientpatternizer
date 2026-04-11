@@ -18,33 +18,34 @@ def getratioarray(stepsize: int, lowerbound: int, upperbound: int) -> list:
         array.append(round(step,2))
         step -= (stepsize/100)
     log("Count of ratios: "+str(len(array)))
-    log("Ratios: "+json.dumps([i * 100 for i in array]))
+    log("Ratios: "+json.dumps([round(i * 100,0) for i in array]))
     return array
-    
-def generatepattern(a: int, b: int, ratioa: float, length: int) -> str:
+
+
+def generatepattern(a: int, b: int, ratioa: float, length: int, patternerror: float) -> str:
     result = []
-    error = 1.0
 
     for _ in range(length):
-        error += ratioa
-        if error >= 1.0:
+        patternerror += ratioa
+        if patternerror >= 1.0:
             result.append(str(a))
-            error -= 1.0
+            patternerror -= 1.0
         else:
             result.append(str(b))
 
-    return "".join(result)
+    return "".join(result), patternerror
     
 def generategradient(a: int, b: int, size: int, offset: int, ratiostepsize: int, lowerbound: int, upperbound: int) -> str:
     ratios = getratioarray(ratiostepsize, lowerbound, upperbound)
     patterns = []
     patternsize = size // len(ratios)
+    patternerror = 1
     log("Amount of layers per ratio: "+str(patternsize))
     for _ in range(offset):
         patterns.append(str(a))
-    
     for ratio in ratios:
-        patterns.append(generatepattern(a, b, ratio, patternsize))
+        pattern, patternerror = generatepattern(a, b, ratio, patternsize, patternerror)
+        patterns.append(pattern)
     
     return "".join(patterns)
 
